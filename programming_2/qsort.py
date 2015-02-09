@@ -1,6 +1,9 @@
 #!/usr/bin/python
 import unittest
 
+def swap(A, i, j):
+    A[i], A[j] = A[j], A[i]
+
 PVT = "FIRST"
 
 # Uses a heuristic to select a pivot and move it and swap it
@@ -10,13 +13,13 @@ def movePivot(arr, leftIdx, rightIdx):
     if PVT == "FIRST":
         return
     elif PVT == "LAST":
-        arr[leftIdx], arr[rightIdx] = arr[rightIdx], arr[leftIdx]
+        swap(arr, leftIdx, rightIdx)
     elif PVT == "MEDIAN_OF_THREE":
         a = sorted([arr[leftIdx], arr[rightIdx], arr[(leftIdx + rightIdx)/2]])
         if arr[rightIdx] == a[1]:
-            arr[leftIdx], arr[rightIdx] = arr[rightIdx], arr[leftIdx]
+            swap(arr, leftIdx, rightIdx)
         elif arr[(leftIdx+rightIdx)/2] == a[1]:
-            arr[leftIdx], arr[(leftIdx+rightIdx)/2] = arr[(leftIdx+rightIdx)/2], arr[leftIdx]
+            swap(arr, leftIdx, (leftIdx+rightIdx)/2)
 
 
 # Uses first element in range as pivot
@@ -26,10 +29,10 @@ def partition(arr, leftIdx, rightIdx):
     i = leftIdx+1
     for j in range(i, rightIdx):
         if arr[j] < p:
-            arr[i], arr[j] = arr[j], arr[i]
+            swap(arr, i, j)
             i += 1
 
-    arr[i-1], arr[leftIdx] = arr[leftIdx], arr[i-1]
+    swap(arr, i-1, leftIdx)
 
     return i-1
 
