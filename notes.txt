@@ -7,3 +7,27 @@ If T(n) <= aT(n/b) + O(n^d), then:
         O(n^d)          if a < b^d
         O(n^(log_b(a))) if a > b^d
     }
+
+// ============================================================================
+//                           Randomized Selection
+// ============================================================================
+Given a random array, find the kth element of its sorted order
+This is known as finding the kth statistic and can be done in O(n) time
+
+Pick a pivot and partition elements around it.  Then we can make a recursive call
+on either the left or right side of it, depending on which statistic we're looking for
+
+randomSelect(A, k):
+    if n == 1:
+        return A[1]
+
+    Choose pivot p from A, uniformly at random, and partition A around p
+    let j = new index of p
+
+    if k == j:
+        return A[j]
+    elif j > k:
+        return randomSelect(A[0:p], k)
+    elif j < k:
+        return randomSelect(A[p+1:], k - j)
+
