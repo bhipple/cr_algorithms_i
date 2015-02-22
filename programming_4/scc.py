@@ -1,6 +1,6 @@
 #!/usr/bin/python
 import sys
-sys.setrecursionlimit(100000)
+sys.setrecursionlimit(1000000)
 
 visited = {}
 leader = {}
@@ -40,20 +40,18 @@ def sccsToSizes(sccs):
 
     return sorted(sizes, reverse=True)
 
-def dfs(G, i, isFirstPass):
+def dfs(G, i):
     global visited, leader, s, finishOrder
     visited[i] = True
+    leader[i] = s
 
     for j in G[i]:
         if not j in visited:
-            dfs(G, j, isFirstPass)
+            dfs(G, j)
 
-    if isFirstPass:
-        finishOrder.append(i)
-    else:
-        leader[i] = s
+    finishOrder.append(i)
 
-def dfsLoop(G, seq, isFirstPass):
+def dfsLoop(G, seq):
     global visited, s, finishOrder
     visited.clear()
     s = 0
@@ -61,8 +59,7 @@ def dfsLoop(G, seq, isFirstPass):
     for i in seq:
         if not i in visited:
             s = i
-            dfs(G, i, isFirstPass)
-
+            dfs(G, i)
 
 def scc(G, Grev):
     global finishOrder, leader
@@ -70,8 +67,8 @@ def scc(G, Grev):
     leader = {}
 
     initialSeq = range(len(G), 0, -1)
-    dfsLoop(Grev, initialSeq, True)
+    dfsLoop(Grev, initialSeq)
     finishOrder.reverse()
-    dfsLoop(G, finishOrder, False)
+    dfsLoop(G, finishOrder)
 
     return sccsToSizes(leaderToSCCs(leader))

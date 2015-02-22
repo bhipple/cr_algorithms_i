@@ -51,5 +51,11 @@ class Test32221(unittest.TestCase):
         res = scc(self.G, self.Grev)
         self.assertEqual([3,2,2,2,1], res[0:5])
 
+testmode = False
 if __name__ == '__main__':
-    unittest.main()
+    if testmode:
+        unittest.main()
+    else:
+        [G, Grev] = readGraphFromFile('SCC.txt')
+        res = scc(G, Grev)
+        print res[0:10]
