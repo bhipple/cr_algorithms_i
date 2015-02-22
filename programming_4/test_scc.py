@@ -31,13 +31,6 @@ class TestTriangle(unittest.TestCase):
     def setUp(self):
         [self.G, self.Grev] = readGraphFromFile('three_triangles.txt')
 
-    #def test_print(self):
-        #printBoth(self.G, self.Grev)
-
-    def test_finishing_times(self):
-        scc(self.G, self.Grev)
-        #self.assertEqual([3,5,2,8,6,9,1,4,7], getFinishOrder())
-
     def test_sccs(self):
         res = scc(self.G, self.Grev)
         self.assertEqual([3,3,3], res)
@@ -49,6 +42,14 @@ class Test6321(unittest.TestCase):
     def test_sccs(self):
         res = scc(self.G, self.Grev)
         self.assertEqual([6,3,2,1], res)
+
+class Test32221(unittest.TestCase):
+    def setUp(self):
+        [self.G, self.Grev] = readGraphFromFile('32221.txt')
+
+    def test_sccs(self):
+        res = scc(self.G, self.Grev)
+        self.assertEqual([3,2,2,2,1], res[0:5])
 
 if __name__ == '__main__':
     unittest.main()
