@@ -31,3 +31,72 @@ randomSelect(A, k):
     elif j < k:
         return randomSelect(A[p+1:], k - j)
 
+// ============================================================================
+//                            Topological Sorting
+// ============================================================================
+Can be reduced to DFS
+
+DFS(G, s):
+    s.explored = True
+    for adjV in s.edges:
+        if not adjV.explored:
+            DFS(G, adjV)
+    f(s) = current_label
+    current_label -= 1
+
+DFS-Topo(G):
+    current_label = len(G.nodes)
+    f = {}
+    for v in G.nodes:
+        if not v.explored:
+            DFS(G,V)
+
+    return f
+
+f is a dictionary that maps a node name to its order in the topological sorting
+
+// ============================================================================
+//                       Strongly Connected Components
+// ============================================================================
+The strongly connected components of a directed graph G are the equivalence classes
+of the relation:
+    u ~ v if and only if there exists a path from u to v and a path from v to u in G
+
+Kosaraju's Two-Pass Algorithm for calculating SCCs in linear time (two DFS passes)
+    Given a directed graph G
+    1) Let G_rev = G with all arcs reversed
+    2) Run DFS-Loop on G_rev
+        Compute the "magic ordering" of nodes for the second pass
+        Let f(v) = "finishing time of v
+    3) Run DFS-Loop on G
+        Discover the SCCs one-by-one
+        Process nodes in decreasing order of finishing times
+        SCCs = nodes with some "leader" node that discovers the SCC
+
+
+Assume the nodes are labeled 1 to n
+
+DFS(G, i):
+    i.explored = True
+    set leader(i) = node s
+    for each arc (i, j) in G:
+        if j not yet explored:
+            DFS(G, j)
+    t += 1
+    f(i) = t
+
+DFS-Loop(G):
+    # number of nodes processed so far
+    t = 0
+
+    # most recent vertex from which a DFS was initiated
+    s = NULL
+
+    for i in range(n, 0):
+        if i not yet explored
+            s = i
+            DFS(G, i)
+
+
+Interesting observation:
+For *ANY* directed graph, the SCCs form a DAG!
