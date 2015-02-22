@@ -15,11 +15,15 @@ def readGraphFromFile(filePath):
             G[uNum].append(vNum)
         else:
             G[uNum] = [vNum]
+        if not vNum in G:
+            G[vNum] = []
 
         if vNum in Grev:
             Grev[vNum].append(uNum)
         else:
             Grev[vNum] = [uNum]
+        if not uNum in Grev:
+            Grev[uNum] = []
 
     return [G, Grev]
 
@@ -38,7 +42,6 @@ class TestTriangle(unittest.TestCase):
         res = scc(self.G, self.Grev)
         self.assertEqual([3,3,3], res)
 
-"""
 class Test6321(unittest.TestCase):
     def setUp(self):
         [self.G, self.Grev] = readGraphFromFile('6321.txt')
@@ -46,7 +49,6 @@ class Test6321(unittest.TestCase):
     def test_sccs(self):
         res = scc(self.G, self.Grev)
         self.assertEqual([6,3,2,1], res)
-        """
 
 if __name__ == '__main__':
     unittest.main()

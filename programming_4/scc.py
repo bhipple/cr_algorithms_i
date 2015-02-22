@@ -38,22 +38,22 @@ def sccsToSizes(sccs):
     for key in sccs:
         sizes.append(sccs[key])
 
-    return sorted(sizes)
+    return sorted(sizes, reverse=True)
 
-def dfs(G, i, firstPass):
+def dfs(G, i, isFirstPass):
     global visited, leader, s, finishOrder
     visited[i] = True
 
     for j in G[i]:
         if not j in visited:
-            dfs(G, j, firstPass)
+            dfs(G, j, isFirstPass)
 
-    if firstPass:
+    if isFirstPass:
         finishOrder.append(i)
     else:
         leader[i] = s
 
-def dfsLoop(G, seq, firstPass):
+def dfsLoop(G, seq, isFirstPass):
     global visited, s, finishOrder
     visited.clear()
     s = 0
@@ -61,20 +61,17 @@ def dfsLoop(G, seq, firstPass):
     for i in seq:
         if not i in visited:
             s = i
-            dfs(G, i, firstPass)
+            dfs(G, i, isFirstPass)
 
 
 def scc(G, Grev):
     global finishOrder, leader
     finishOrder = []
     leader = {}
-    visited = {}
 
     initialSeq = range(len(G), 0, -1)
     dfsLoop(Grev, initialSeq, True)
     finishOrder.reverse()
     dfsLoop(G, finishOrder, False)
 
-    sccs = leaderToSCCs(leader)
-    sizes = sccsToSizes(sccs)
-    return sizes
+    return sccsToSizes(leaderToSCCs(leader))
