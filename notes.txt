@@ -100,3 +100,15 @@ DFS-Loop(G):
 
 Interesting observation:
 For *ANY* directed graph, the SCCs form a DAG!
+
+
+// ============================================================================
+//                                  Week 5
+// ============================================================================
+Dijkstra's shortest path, heaps, red black trees
+
+Red Black Tree Invariants:
+    1) Each node is either red or block
+    2) The root is black
+    3) No two reds in a row in any path
+    4) Every root-to-null path passes through the same number of black nodes
