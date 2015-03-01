@@ -51,7 +51,7 @@ class TestHW(unittest.TestCase):
         A = dijkstra(G,1)
 
         Nodes = [7,37,59,82,99,115,133,165,188,197]
-        print filter(lambda x: x in Nodes, A)
+        print map(lambda y: A[y], filter(lambda x: x in Nodes, A))
 
 if __name__ == '__main__':
     unittest.main()
