@@ -100,3 +100,37 @@ DFS-Loop(G):
 
 Interesting observation:
 For *ANY* directed graph, the SCCs form a DAG!
+
+
+// ============================================================================
+//                                  Week 5
+// ============================================================================
+Dijkstra's Algorithm
+    Initialize the graph G, starting from a node s and searching for a node v
+        X = {s}                 # Nodes visited so far
+        A[s]- = 0               # Computed shortest distance to s
+        B[s] = empty path       # Computed shortest path -- not necessary for implementations
+
+        while v not in X:
+            Among all edges (v,w) in E, with v in X, w not in X,
+            pick the one that minimizes:
+            A[v] + l_vw (Dijkstra's greedy criterion)
+            Add the node at w to X, with cost:
+                A[w] = A[v] + l_vw
+                B[w] = B[v] + w
+
+    Implementation:
+    We will use a heap, with the following two properties:
+        1) Elements in the heap are the vertices of V-X
+        2) key[v] = smallest Dijkstra greedy score of an edge (u,v) in E with v in X
+
+
+Mediam Maintenance problem for heaps
+    Given a sequence x1, x2, ..., xn of numbers, given one by one
+    At each step i, the median of {x1, ..., xi}
+    Use log(i) time at each step i.
+
+    Maintain two heaps H_low and H_high
+    H_low supports extract max
+    H_high supports extract min
+    The smallest half of the numbers we've seen so far are in H_low, and the largest are in H_high
