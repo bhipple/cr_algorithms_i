@@ -134,3 +134,9 @@ Mediam Maintenance problem for heaps
     H_low supports extract max
     H_high supports extract min
     The smallest half of the numbers we've seen so far are in H_low, and the largest are in H_high
+
+Red Black Tree Invariants:
+    1) Each node is either red or block
+    2) The root is black
+    3) No two reds in a row in any path
+    4) Every root-to-null path passes through the same number of black nodes
