@@ -9,18 +9,26 @@ class MedianFinder:
     def ct(self):
         return len(self.mins) + len(self.maxes)
 
+    def fact(self, heap):
+        if heap == self.mins:
+            return -1
+        return 1
+
     def getMedian(self):
         if self.ct() == 0:
             return float('inf')
         if self.ct() % 2 == 0:
             return -1 * self.mins[0]
-        return abs(self.getLarger()[0])
+        if len(self.mins) > len(self.maxes):
+            return self.mins[0] * -1
+        else:
+            return self.maxes[0]
 
     def getSmaller(self):
         if len(self.mins) < len(self.maxes):
-            return self.mins, -1
+            return self.mins
         else:
-            return self.maxes, 1
+            return self.maxes
 
     def getLarger(self):
         if len(self.mins) > len(self.maxes):
@@ -31,9 +39,9 @@ class MedianFinder:
     def rebalance(self):
         if abs(len(self.mins) - len(self.maxes)) <= 1:
             return
-        x, fact = self.getSmaller()
+        x = self.getSmaller()
         y = self.getLarger()
-        heapq.heappush(x, fact * heapq.heappop(y))
+        heapq.heappush(x, -1 * heapq.heappop(y))
 
     def push(self, x):
         if x < self.getMedian():
@@ -47,6 +55,5 @@ class MedianFinder:
         for i in seq:
             self.push(i)
             res += self.getMedian()
+            res = res % 10000
         return res
-
-

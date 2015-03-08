@@ -46,13 +46,17 @@ class Tester(unittest.TestCase):
         A.push(stream[9])
         self.assertEqual(5, A.getMedian())
 
+    def test_median_sum_2(self):
+        stream = fileToList('23.txt')
+        self.assertEqual(23, self.A.streamedMedianSum(stream))
+
     def test_median_sum(self):
         stream = fileToList('54.txt')
         self.assertEqual(54, self.A.streamedMedianSum(stream))
 
-    def test_median_sum_2(self):
-        stream = fileToList('23.txt')
-        self.assertEqual(23, self.A.streamedMedianSum(stream))
+    def test_median_sum(self):
+        stream = fileToList('82.txt')
+        self.assertEqual(82, self.A.streamedMedianSum(stream))
 
     def test_hw(self):
         stream = fileToList('Median.txt')
