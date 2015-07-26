@@ -23,8 +23,8 @@ class Tester(unittest.TestCase):
     def test_6(self):
         self.assertEqual(6, twoSums(loadSet('6.txt')))
 
-    def test_hw(self):
-        print twoSums(loadSet('algo1_programming_prob_2sum.txt'))
+    #def test_hw(self):
+    #    print twoSums(loadSet('algo1_programming_prob_2sum.txt'))
 
 if __name__ == '__main__':
     unittest.main()

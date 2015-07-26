@@ -51,7 +51,7 @@ class Test32221(unittest.TestCase):
         res = scc(self.G, self.Grev)
         self.assertEqual([3,2,2,2,1], res[0:5])
 
-testmode = False
+testmode = True
 if __name__ == '__main__':
     if testmode:
         unittest.main()
